@@ -18,7 +18,7 @@ public class Archivio {
         pubblicazioni.add(elemento);
     }
 
-    public Pubblicazione rimuoviElementoPerISBN(String isbn) {
+    public Pubblicazione rimuoviElementoPerISBN(String isbn) throws IOException {
         Optional<Pubblicazione> elementoDaRimuovere = pubblicazioni.stream()
                 .filter(p -> p.getIsbn().equals(isbn)).findFirst();
 
@@ -27,15 +27,15 @@ public class Archivio {
         return elementoDaRimuovere.orElse(null);
     }
 
-    public Optional<Pubblicazione> ricercaPerISBN(String isbn) {
+    public Optional<Pubblicazione> ricercaPerISBN(String isbn) throws IOException {
         return pubblicazioni.stream().filter(p -> p.getIsbn().equals(isbn)).findFirst();
     }
 
-    public List<Pubblicazione> ricercaPerAnnoPubblicazione(int anno) {
+    public List<Pubblicazione> ricercaPerAnnoPubblicazione(int anno)  throws IOException {
         return pubblicazioni.stream().filter(p -> p.getAnnoPubblicazione() == anno).toList();
     }
 
-    public List<Pubblicazione> ricercaPerAutore(String cognome) {
+    public List<Pubblicazione> ricercaPerAutore(String cognome) throws IOException {
         return pubblicazioni.stream().filter(p -> p instanceof Libri).filter(p -> {
             Libri libro = (Libri) p;
             return libro.getAutore().getCognome().equalsIgnoreCase(cognome);

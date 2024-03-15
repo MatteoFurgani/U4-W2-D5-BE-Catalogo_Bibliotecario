@@ -1,9 +1,9 @@
-Libro{genere='Reference book', isbn='ISBN_Libro_1', titolo='The Daffodil Sky', annoPubblicazione=2024, numeroPagine=300}
-Libro{genere='Horror', isbn='ISBN_Libro_2', titolo='The Monkey's Raincoat', annoPubblicazione=2023, numeroPagine=301}
-Libro{genere='Folklore', isbn='ISBN_Libro_4', titolo='Moab Is My Washpot', annoPubblicazione=2021, numeroPagine=303}
-Libro{genere='Fantasy', isbn='ISBN_Libro_5', titolo='The Golden Bowl', annoPubblicazione=2020, numeroPagine=304}
-Rivista{periodicita=SETTIMANALE, isbn='ISBN_Rivista_1', titolo='Arms and the Man', annoPubblicazione=2020, numeroPagine=50}
-Rivista{periodicita=MENSILE, isbn='ISBN_Rivista_2', titolo='Carrion Comfort', annoPubblicazione=2019, numeroPagine=51}
-Rivista{periodicita=SEMESTRALE, isbn='ISBN_Rivista_3', titolo='The Line of Beauty', annoPubblicazione=2018, numeroPagine=52}
-Rivista{periodicita=SETTIMANALE, isbn='ISBN_Rivista_4', titolo='Time of our Darkness', annoPubblicazione=2017, numeroPagine=53}
-Rivista{periodicita=MENSILE, isbn='ISBN_Rivista_5', titolo='The Moving Toyshop', annoPubblicazione=2016, numeroPagine=54}
+Libro{genere='Reference book', isbn='ISBN_Libro_1', titolo='Françoise Sagan', annoPubblicazione=2024, numeroPagine=300}
+Libro{genere='Biography/Autobiography', isbn='ISBN_Libro_2', titolo='The Line of Beauty', annoPubblicazione=2023, numeroPagine=301}
+Libro{genere='Fairy tale', isbn='ISBN_Libro_4', titolo='A Darkling Plain', annoPubblicazione=2021, numeroPagine=303}
+Libro{genere='Biography/Autobiography', isbn='ISBN_Libro_5', titolo='Far From the Madding Crowd', annoPubblicazione=2020, numeroPagine=304}
+Rivista{periodicita=SETTIMANALE, isbn='ISBN_Rivista_1', titolo='The Heart Is a Lonely Hunter', annoPubblicazione=2020, numeroPagine=50}
+Rivista{periodicita=MENSILE, isbn='ISBN_Rivista_2', titolo='Ego Dominus Tuus', annoPubblicazione=2019, numeroPagine=51}
+Rivista{periodicita=SEMESTRALE, isbn='ISBN_Rivista_3', titolo='Blood's a Rover', annoPubblicazione=2018, numeroPagine=52}
+Rivista{periodicita=SETTIMANALE, isbn='ISBN_Rivista_4', titolo='Arms and the Man', annoPubblicazione=2017, numeroPagine=53}
+Rivista{periodicita=MENSILE, isbn='ISBN_Rivista_5', titolo='Precious Bane', annoPubblicazione=2016, numeroPagine=54}

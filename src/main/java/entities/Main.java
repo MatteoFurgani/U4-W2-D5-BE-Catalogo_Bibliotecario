@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Archivio archivio = new Archivio();
         Faker faker = new Faker();
 
@@ -46,47 +46,73 @@ public class Main {
         //RICERCA TRAMITE ISBN
         System.out.println("----RICERCA PER ISBN----");
         String isbnDaRicercare = "ISBN_Libro_3";
-        Optional<Pubblicazione> pubblicazioneByISBN = archivio.ricercaPerISBN(isbnDaRicercare);
-        if (pubblicazioneByISBN.isPresent()) {
-            System.out.println("Pubblicazione trovata: " + pubblicazioneByISBN.get().getTitolo());
-        } else {
-            System.out.println("Nessuna pubblicazione trovata con l'ISBN: " + isbnDaRicercare);
+        try {
+            Optional<Pubblicazione> pubblicazioneByISBN = archivio.ricercaPerISBN(isbnDaRicercare);
+            if (pubblicazioneByISBN.isPresent()) {
+                System.out.println("Pubblicazione trovata: " + pubblicazioneByISBN.get().getTitolo());
+            } else {
+                System.out.println("Nessuna pubblicazione trovata con l'ISBN: " + isbnDaRicercare);
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante la ricerca per ISBN: " + e.getMessage());
         }
+
 
         //RIMUOVI TRAMITE ISBN
         System.out.println("       ");
         System.out.println("----RIMUOVI PER ISBN----");
         String isbnDaRimuovere = "ISBN_Libro_3";
         System.out.println("Rimuovendo l'elemento con ISBN: " + isbnDaRimuovere);
-        Pubblicazione rimozioneAvvenuta = archivio.rimuoviElementoPerISBN(isbnDaRimuovere);
-        if (rimozioneAvvenuta!= null) {
-            System.out.println("Cancellazione avvenuta!");
-        } else {
-            System.out.println("Errore durante la cancellazione.");
+        try {
+            Pubblicazione rimozioneAvvenuta = archivio.rimuoviElementoPerISBN(isbnDaRimuovere);
+            if (rimozioneAvvenuta != null) {
+                System.out.println("Cancellazione avvenuta!");
+            } else {
+                System.out.println("Errore durante la cancellazione.");
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante la rimozione per ISBN: " + e.getMessage());
         }
 
-        //RICERCA TRAMITE ANNO PUBBLICAZIONE
+
+        // RICERCA TRAMITE ANNO PUBBLICAZIONE
         System.out.println("       ");
         System.out.println("----RICERCA PER ANNO DI PUBBLICAZIONE----");
         int annoDaRicercare = 2023;
         System.out.println("Ricerca per anno di pubblicazione: " + annoDaRicercare);
-        List<Pubblicazione> pubblicazioniAnno = archivio.ricercaPerAnnoPubblicazione(annoDaRicercare);
-        System.out.println("Pubblicazioni dell'anno " + annoDaRicercare + ":");
-        for (Pubblicazione pubblicazione : pubblicazioniAnno) {
-            System.out.println(pubblicazione.getTitolo());
+        try {
+            List<Pubblicazione> pubblicazioniAnno = archivio.ricercaPerAnnoPubblicazione(annoDaRicercare);
+            if (pubblicazioniAnno.isEmpty()) {
+                System.out.println("Nessuna pubblicazione trovata per l'anno " + annoDaRicercare);
+            } else {
+                System.out.println("Pubblicazioni dell'anno " + annoDaRicercare + ":");
+                for (Pubblicazione pubblicazione : pubblicazioniAnno) {
+                    System.out.println(pubblicazione.getTitolo());
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante la ricerca per anno di pubblicazione: " + e.getMessage());
         }
+
+
+
 
         //RICERCA TRAMITE AUTORE
         System.out.println("       ");
         System.out.println("----RICERCA PER AUTORE----");
-        List<Pubblicazione> pubblicazioniAutore = archivio.ricercaPerAutore(autore.getCognome());
-        System.out.println("Pubblicazioni dell'autore " + autore.getCognome() + ":");
-        for (Pubblicazione pubblicazione : pubblicazioniAutore) {
-            if (pubblicazione instanceof Libri) {
-                Libri libro = (Libri) pubblicazione;
-                System.out.println("Titolo del libro: " + libro.getTitolo());
+        try {
+            List<Pubblicazione> pubblicazioniAutore = archivio.ricercaPerAutore(autore.getCognome());
+            System.out.println("Pubblicazioni dell'autore " + autore.getCognome() + ":");
+            for (Pubblicazione pubblicazione : pubblicazioniAutore) {
+                if (pubblicazione instanceof Libri) {
+                    Libri libro = (Libri) pubblicazione;
+                    System.out.println("Titolo del libro: " + libro.getTitolo());
+                }
             }
+        } catch (IOException e) {
+            System.err.println("Errore durante la ricerca per autore: " + e.getMessage());
         }
+
 
         //SALVATAGGIO SU DISCO
         System.out.println("       ");
