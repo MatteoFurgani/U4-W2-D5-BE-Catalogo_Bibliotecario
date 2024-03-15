@@ -2,6 +2,7 @@ package entities;
 
 import com.github.javafaker.Faker;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class Main {
             archivio.aggiungiElemento(libro);
         }
 
-        // Creazione di 5 riviste
+        // Creo di 5 riviste
         for (int i = 0; i < 5; i++) {
             String isbn = "ISBN_Rivista_" + (i + 1);
             String titolo = faker.book().title();
@@ -57,7 +58,12 @@ public class Main {
         System.out.println("----RIMUOVI PER ISBN----");
         String isbnDaRimuovere = "ISBN_Libro_3";
         System.out.println("Rimuovendo l'elemento con ISBN: " + isbnDaRimuovere);
-        archivio.rimuoviElementoPerISBN(isbnDaRimuovere);
+        Pubblicazione rimozioneAvvenuta = archivio.rimuoviElementoPerISBN(isbnDaRimuovere);
+        if (rimozioneAvvenuta!= null) {
+            System.out.println("Cancellazione avvenuta!");
+        } else {
+            System.out.println("Errore durante la cancellazione.");
+        }
 
         //RICERCA TRAMITE ANNO PUBBLICAZIONE
         System.out.println("       ");
@@ -81,6 +87,27 @@ public class Main {
                 System.out.println("Titolo del libro: " + libro.getTitolo());
             }
         }
+
+        //SALVATAGGIO SU DISCO
+        System.out.println("       ");
+        System.out.println("----SALVATAGGIO SU DISCO----");
+        try {
+            archivio.salvataggioSuDisco("archivio.txt");
+            System.out.println("Archivio salvato su disco.");
+        } catch (IOException e) {
+            System.err.println("Errore durante il salvataggio su disco: " + e.getMessage());
+        }
+
+        //CARICAMENTO DA DISCO
+        System.out.println("       ");
+        System.out.println("----CARICAMENTO DA DISCO----");
+        try {
+            archivio.caricamentoDalDisco("archivio.txt");
+            System.out.println("Archivio caricato da disco.");
+        } catch (IOException e) {
+            System.err.println("Errore durante il caricamento da disco: " + e.getMessage());
+        }
+
 
 
     }

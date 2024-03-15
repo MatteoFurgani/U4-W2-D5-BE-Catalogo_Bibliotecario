@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,8 +18,13 @@ public class Archivio {
         pubblicazioni.add(elemento);
     }
 
-    public void rimuoviElementoPerISBN(String isbn) {
-        pubblicazioni.removeIf(p -> p.getIsbn().equals(isbn));
+    public Pubblicazione rimuoviElementoPerISBN(String isbn) {
+        Optional<Pubblicazione> elementoDaRimuovere = pubblicazioni.stream()
+                .filter(p -> p.getIsbn().equals(isbn)).findFirst();
+
+        elementoDaRimuovere.ifPresent(p -> pubblicazioni.remove(p));
+
+        return elementoDaRimuovere.orElse(null);
     }
 
     public Optional<Pubblicazione> ricercaPerISBN(String isbn) {
@@ -32,8 +38,36 @@ public class Archivio {
     public List<Pubblicazione> ricercaPerAutore(String cognome) {
         return pubblicazioni.stream().filter(p -> p instanceof Libri).filter(p -> {
             Libri libro = (Libri) p;
-            return libro.getAutore().equals(cognome);
-        }).toList();
+            return libro.getAutore().getCognome().equalsIgnoreCase(cognome);
+                })
+                .toList();
+    }
+
+    public void salvataggioSuDisco(String filename) throws IOException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+            for (Pubblicazione pubblicazione : pubblicazioni) {
+                writer.println(pubblicazione.toString());
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante il salvataggio su disco: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public void caricamentoDalDisco(String filename) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante il caricamento dal disco: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public List<Pubblicazione> getPubblicazioni() {
+        return pubblicazioni;
     }
 
 

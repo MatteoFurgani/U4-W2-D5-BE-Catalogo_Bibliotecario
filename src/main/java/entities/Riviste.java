@@ -17,4 +17,14 @@ public class Riviste extends Pubblicazione {
         this.periodicita = periodicita;
     }
 
+    @Override
+    public String toString() {
+        return "Rivista{" +
+                "periodicita=" + periodicita +
+                ", isbn='" + isbn + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", annoPubblicazione=" + annoPubblicazione +
+                ", numeroPagine=" + numeroPagine +
+                '}';
+    }
 }
