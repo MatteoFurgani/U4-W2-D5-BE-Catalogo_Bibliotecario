@@ -10,7 +10,7 @@ public class Autore {
     }
 
     public Autore(String cognome) {
-
+        this.nome = "";
         this.cognome = cognome;
     }
 

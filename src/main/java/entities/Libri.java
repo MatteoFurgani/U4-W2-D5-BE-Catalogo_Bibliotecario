@@ -5,9 +5,9 @@ public class Libri extends Pubblicazione{
     private String autore;
     private String genere;
 
-    public Libri(String isbn, String titolo, int annoPubblicazione, int numeroPagine, String autore, String genere) {
+    public Libri(String isbn, String titolo, int annoPubblicazione, int numeroPagine, Autore autore, String genere) {
         super(isbn, titolo, annoPubblicazione, numeroPagine);
-        this.autore = autore;
+        this.autore = String.valueOf(autore);
         this.genere = genere;
     }
 
@@ -15,8 +15,8 @@ public class Libri extends Pubblicazione{
         return autore;
     }
 
-    public void setAutore(String autore) {
-        this.autore = autore;
+    public void setAutore(Autore autore) {
+        this.autore = String.valueOf(autore);
     }
 
     public String getGenere() {

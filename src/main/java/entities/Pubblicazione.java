@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Random;
+
 public abstract class Pubblicazione {
     protected String isbn;
     protected String titolo;
@@ -7,6 +9,7 @@ public abstract class Pubblicazione {
     protected int numeroPagine;
 
     public Pubblicazione(String isbn, String titolo, int annoPubblicazione, int numeroPagine) {
+
         this.isbn = isbn;
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
