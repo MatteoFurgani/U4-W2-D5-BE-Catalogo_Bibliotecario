@@ -25,6 +25,17 @@ public class Archivio {
         return pubblicazioni.stream().filter(p -> p.getIsbn().equals(isbn)).findFirst();
     }
 
+    public List<Pubblicazione> ricercaPerAnnoPubblicazione(int anno) {
+        return pubblicazioni.stream().filter(p -> p.getAnnoPubblicazione() == anno).toList();
+    }
+
+    public List<Pubblicazione> ricercaPerAutore(String cognome) {
+        return pubblicazioni.stream().filter(p -> p instanceof Libri).filter(p -> {
+            Libri libro = (Libri) p;
+            return libro.getAutore().equals(cognome);
+        }).toList();
+    }
+
 
 
 }

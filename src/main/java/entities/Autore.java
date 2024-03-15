@@ -15,6 +15,7 @@ public class Autore {
     }
 
     public String getNome() {
+
         return nome;
     }
 

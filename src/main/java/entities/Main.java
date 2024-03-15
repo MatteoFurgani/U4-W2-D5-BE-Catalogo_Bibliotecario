@@ -2,6 +2,7 @@ package entities;
 
 import com.github.javafaker.Faker;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Main {
@@ -10,8 +11,8 @@ public class Main {
         Faker faker = new Faker();
 
         // Creo 3 autori FISSI
-        Autore autore1 = new Autore("Mario", "Rossi");
-        Autore autore2 = new Autore("Carla", "Verdi");
+        Autore autore1 = new Autore("Mario", "Verdi");
+        Autore autore2 = new Autore("Carla", "Rossi");
         Autore autore3 = new Autore("Paola", "Bianchi");
         Autore autore = null;
 
@@ -57,6 +58,29 @@ public class Main {
         String isbnDaRimuovere = "ISBN_Libro_3";
         System.out.println("Rimuovendo l'elemento con ISBN: " + isbnDaRimuovere);
         archivio.rimuoviElementoPerISBN(isbnDaRimuovere);
+
+        //RICERCA TRAMITE ANNO PUBBLICAZIONE
+        System.out.println("       ");
+        System.out.println("----RICERCA PER ANNO DI PUBBLICAZIONE----");
+        int annoDaRicercare = 2023;
+        System.out.println("Ricerca per anno di pubblicazione: " + annoDaRicercare);
+        List<Pubblicazione> pubblicazioniAnno = archivio.ricercaPerAnnoPubblicazione(annoDaRicercare);
+        System.out.println("Pubblicazioni dell'anno " + annoDaRicercare + ":");
+        for (Pubblicazione pubblicazione : pubblicazioniAnno) {
+            System.out.println(pubblicazione.getTitolo());
+        }
+
+        //RICERCA TRAMITE AUTORE
+        System.out.println("       ");
+        System.out.println("----RICERCA PER AUTORE----");
+        List<Pubblicazione> pubblicazioniAutore = archivio.ricercaPerAutore(autore.getCognome());
+        System.out.println("Pubblicazioni dell'autore " + autore.getCognome() + ":");
+        for (Pubblicazione pubblicazione : pubblicazioniAutore) {
+            if (pubblicazione instanceof Libri) {
+                Libri libro = (Libri) pubblicazione;
+                System.out.println("Titolo del libro: " + libro.getTitolo());
+            }
+        }
 
 
     }
